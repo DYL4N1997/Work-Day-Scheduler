@@ -1,77 +1,64 @@
-// Variables
-var momentTime = parseInt(moment().format('H'));
-var classes = [".9", ".10", ".11", ".12", ".1", ".2", ".3", ".4", ".5", ".6"]
-var time = [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18,];
-var classIndex = time.indexOf(momentTime);
-// Setting current day time in UK format
-$("#currentDay").text(moment().format('dddd, MMMM D, YYYY'));
-var currentDayCheck = moment().format('dddd, MMMM D, YYYY')
-var userNotes = ["", "", "", "", "", "", "", "", "", "", ""]
+$("#currentDay").text(moment().format('dddd, MMMM D, YYYY h:mm'));
 
-//startup code to designate past, future and present classes to container rows
-if (momentTime < 8) {
-    futureMoment ();
-}
-else if (momentTime > 18) {
-    pastMoment();
-}
-else {
-    presentMoment()
-}
+$(document).ready(function () {
 
-//startup functions to grab data from local storage data and to determine if app opened on a new day
-getData();
-verifyDay()
 
-/// function for when time is before 9am, assigning all but the first row the future class
-function futureMoment () {
-    for (i = 1; i < classes.length; i++) {
-        $(classes[i]).addClass("future");
+  $(".saveBtn").on("click", function () {
+    var comment = $(this).siblings(".comment").val();
+    var time = $(this).parent().attr("id");
+
+    console.log("comment: ", comment);
+    console.log("time: ", time);
+
+    localStorage.setItem(time, comment);
+  });
+
+
+
+  function hourBlock(){
+
+
+    var currentTime = moment().hours()
+
+
+    $('.hourBlock').each(function () {
+
+    var timeBlock =  $(this).parent().attr("id");
+    console.log(timeBlock)
+    
+    if(timeBlock < currentTime){
+        $('.input').addClass('past');
+
+    } else if(timeBlock === currentTime){
+        $('.input').removeClass('past');
+        $('.input').addClass('present');
+    } else {
+        $('.input').removeClass('past');
+        $('.input').removeClass('present');
+        $('.input').addClass('future');
     }
-    $(classes[0]).addClass("present");
-}
+    })
 
-/// function for when time is after 6pm, assigning all but the last row the past class
-function pastMoment() {
-    for (i = 0; i < classes.length - 1; i++) {
-        $(classes[i]).addClass("past");
-    }
-    $(classes[time.length - 1]).addClass("present");
-}
 
-/// function for middle of the day- uses moment api to determine the hour and assigns classes by that
-function presentMoment() {
-    $(classes[classIndex]).addClass("present");
-    for (i = 0; i < classIndex; i++) {
-        $(classes[i]).addClass("past");
-    }
-    for (i = classIndex + 1; i < classes.length; i++) {
-        $(classes[i]).addClass("future");
-    }
-}
+  }
 
-$(".saveBtn").on("click", function () {
-    var j = $(this).data('index');
-    userNotes[j] = $(classes[j]).val();
-    localStorage.setItem('userNotes', JSON.stringify(userNotes))
-})
+  hourBlock()
 
-function getData() {
-    userNotes = JSON.parse(localStorage.getItem("userNotes"));
-    if (userNotes == null) {
-        userNotes = ["", "", "", "", "", "", "", "", "", "",];
-        return;
-    }
-    for (i =0; i < classes.length; i++) {
-        ($(classes[i])).val(userNotes[i]);
-    }
-}
 
-$(".clear").on("click", function () {
-    clearPlan()
-})
+  $('#9 .comment' ).val(localStorage.getItem('9'))
+  $('#10 .comment' ).val(localStorage.getItem('10'))
+  $('#11 .comment' ).val(localStorage.getItem('11'))
+  $('#12 .comment' ).val(localStorage.getItem('12'))
+  $('#13 .comment' ).val(localStorage.getItem('13'))
+  $('#14 .comment' ).val(localStorage.getItem('14'))
+  $('#15 .comment' ).val(localStorage.getItem('15'))
+  $('#16 .comment' ).val(localStorage.getItem('16'))
+  $('#17 .comment' ).val(localStorage.getItem('17'))
+  $('#18 .comment' ).val(localStorage.getItem('18'))
+  
+});
 
-function clearPlan() {
 
-}
 
+
+// location.reload() clear
