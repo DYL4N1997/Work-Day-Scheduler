@@ -6,6 +6,8 @@ Breate a bimple calendar application that allows a user to save events for each 
 
 # App Screenshot
 
+![screencapture-127-0-0-1-5500-index-html-2022-05-09-00_45_26](https://user-images.githubusercontent.com/82978161/167320782-6a8bf56f-9b40-416e-bca4-e1aa85192c59.png)
+
 # Technologies
 
 - HTML
