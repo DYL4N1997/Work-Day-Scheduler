@@ -1,6 +1,6 @@
 $("#currentDay").text(moment().format('dddd, MMMM D, YYYY h:mm'));
 
-$(document).ready(function () {
+$(document).ready( function() {
 
 
   $(".saveBtn").on("click", function () {
@@ -21,9 +21,9 @@ $(document).ready(function () {
     var currentTime = moment().hours()
 
 
-    $('.hourBlock').each(function () {
+    $('.hourBlock').each( function () {
 
-    var timeBlock =  $(this).parent().attr("id");
+    var timeBlock =  parseInt($(this).parent().attr("id"));
     console.log(timeBlock)
     
     if(timeBlock < currentTime){
@@ -58,7 +58,17 @@ $(document).ready(function () {
   
 });
 
-
-
-
-// location.reload() clear
+// clear local storage
+$(".clear").on("click", function () {
+  localStorage.clear();
+  $("#9 .comment").val(" ");
+  $("#10 .comment").val(" ");
+  $("#11 .comment").val(" ");
+  $("#12 .comment").val(" ");
+  $("#13 .comment").val(" ");
+  $("#14 .comment").val(" ");
+  $("#15 .comment").val(" ");
+  $("#16 .comment").val(" ");
+  $("#17 .comment").val(" ");
+  $("#18 .comment").val(" ");
+});
